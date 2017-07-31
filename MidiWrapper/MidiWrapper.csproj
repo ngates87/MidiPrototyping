@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Rug.Osc, Version=1.2.5.17694, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rug.Osc.1.2.5\lib\Rug.Osc.dll</HintPath>
+    </Reference>
     <Reference Include="Sanford.Multimedia.Midi, Version=6.4.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sanford.Multimedia.Midi.6.4.1\lib\net20\Sanford.Multimedia.Midi.dll</HintPath>
     </Reference>
@@ -43,8 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChannelMessage.cs" />
     <Compile Include="Interfaces\IMidiOutput.cs" />
+    <Compile Include="MidiInputDevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="OSCMidiInputDevice.cs" />
+    <Compile Include="OSCMidiOutputDevice.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
