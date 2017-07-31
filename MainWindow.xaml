@@ -1,0 +1,39 @@
+﻿<Window x:Class="WpfApplication1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApplication1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Button Name="cueGo" Width="50px" Height="50px" Click="Button_Click">
+            C/D GO
+        </Button>
+        <Label Name="CurrentCue" Width="50px" Height="50px" Grid.Column="1" Grid.Row="0">
+
+        </Label>
+        <TextBox Name="cueN" Width="50px" Height="50px" Grid.Column="1" Grid.Row="1">
+
+        </TextBox>
+        <Button Name="cueNGo" Width="100px" Height="50px" Click="Button_Click_1" Grid.Column="0" Grid.Row="1" >
+            Cue N Go
+        </Button>
+
+        <TextBox Name="oscMessage" Width="100px" Height="50px" Grid.Column="1" Grid.Row="2">
+
+        </TextBox>
+        <Button Name="sendOSCMessage" Width="100px" Height="50px" Grid.Column="0" Grid.Row="2" Click="sendOSCMessage_Click" >
+            Send OSC
+        </Button>
+    </Grid>
+</Window>
