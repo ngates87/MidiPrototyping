@@ -11,9 +11,9 @@ namespace WpfApplication1
     /// </summary>
     public partial class MainWindow : Window, IDisposable
     {
-        public Sanford.Multimedia.Midi.InputDevice inputDevice = null;
-        public Sanford.Multimedia.Midi.OutputDevice sanfordOutputDevice = null;
-        public Rug.Osc.OscSender oscSender = new Rug.Osc.OscSender(System.Net.IPAddress.Parse("127.0.0.1"), 6666);
+        public MidiWrapper.IMidiInput inputDevice = null;
+        public MidiWrapper.IMidiOutput sanfordOutputDevice = null;
+        public OscSender oscSender = new Rug.Osc.OscSender(System.Net.IPAddress.Parse("127.0.0.1"), 6666);
 
         public MainWindow()
         {
@@ -21,15 +21,15 @@ namespace WpfApplication1
 
             try
             {
-                this.sanfordOutputDevice = new Sanford.Multimedia.Midi.OutputDevice(2);
+                this.sanfordOutputDevice = new MidiWrapper.OSCMidiOutputDevice(); //new Sanford.Multimedia.Midi.OutputDevice(2);
 
                 var count = Sanford.Multimedia.Midi.InputDevice.DeviceCount;
 
-                inputDevice = new Sanford.Multimedia.Midi.InputDevice(0);
-                inputDevice.StartRecording();
+                inputDevice = new MidiWrapper.OSCMidiInputDevice(); ///new Sanford.Multimedia.Midi.InputDevice(0);
+                inputDevice.StartListening();
                 inputDevice.ChannelMessageReceived += InputDevice_ChannelMessageReceived;
-                inputDevice.SysExMessageReceived += InputDevice_SysExMessageReceived;
-                inputDevice.ShortMessageReceived += InputDevice_ShortMessageReceived;
+                //inputDevice.SysExMessageReceived += InputDevice_SysExMessageReceived;
+                //inputDevice.ShortMessageReceived += InputDevice_ShortMessageReceived;
             }
             catch (Exception ex)
             {
@@ -93,7 +93,7 @@ namespace WpfApplication1
         {
             try
             {
-                sanfordOutputDevice.Send(new Sanford.Multimedia.Midi.ChannelMessage(ChannelCommand.Controller, 0, 77, 0));
+                sanfordOutputDevice.Send(new MidiWrapper.ChannelMessage(MidiWrapper.ChannelCommand.Controller, 0, 77, 0));
 
             }
             catch (Exception ex)
@@ -108,7 +108,7 @@ namespace WpfApplication1
             int cue;
             if (int.TryParse(this.cueN.Text, out cue))
             {
-                sanfordOutputDevice.Send(new Sanford.Multimedia.Midi.ChannelMessage(ChannelCommand.Controller, 0, 77, cue));
+                sanfordOutputDevice.Send(new MidiWrapper.ChannelMessage(MidiWrapper.ChannelCommand.Controller, 0, 77, cue));
             }
         }
 
@@ -116,14 +116,14 @@ namespace WpfApplication1
         {
             if (this.inputDevice != null)
             {
-                this.inputDevice.StopRecording();
-                this.inputDevice.Dispose();
+                this.inputDevice.StopListening();
+                //this.inputDevice.Dispose();
                 this.inputDevice = null;
             }
 
             if (this.sanfordOutputDevice != null)
             {
-                this.sanfordOutputDevice.Dispose();
+                //this.sanfordOutputDevice.Dispose();
                 this.sanfordOutputDevice = null;
             }
         }

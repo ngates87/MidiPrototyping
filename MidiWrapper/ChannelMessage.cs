@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MidiWrapper
 {
-    class ChannelMessage : IChannelMessage
+    public class ChannelMessage : IChannelMessage
     {
         private ChannelCommand command;
         ChannelCommand IChannelMessage.Command
@@ -44,14 +44,21 @@ namespace MidiWrapper
             }
         }
 
-        MessageType IChannelMessage.MessageType => throw new NotImplementedException();
+        private MessageType messageType;
+        MessageType IChannelMessage.MessageType
+        {
+            get
+            {
+                return messageType;
+            }
+        }
 
         public ChannelMessage(ChannelCommand command, int midiChannel, int data1)
         {
             this.command = command;
             this.midiChannel = midiChannel;
             this.data1 = data1;
-
+            this.messageType = MessageType.Channel;
         }
 
         public ChannelMessage(ChannelCommand command, int midiChannel, int data1, int data2) :

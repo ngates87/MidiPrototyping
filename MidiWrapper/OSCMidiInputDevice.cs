@@ -10,7 +10,7 @@ using Rug.Osc;
 
 namespace MidiWrapper
 {
-    class OSCMidiInputDevice : IMidiInput
+    public class OSCMidiInputDevice : IMidiInput
     {
         public event EventHandler<ChannelMessageEventArgs> ChannelMessageReceived;
         private static Rug.Osc.OscReceiver receiver = new Rug.Osc.OscReceiver(IPAddress.Parse("127.0.0.1"), 1701);

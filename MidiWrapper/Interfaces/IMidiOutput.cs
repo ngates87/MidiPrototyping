@@ -55,7 +55,7 @@ namespace MidiWrapper
         Short = 5
     }
 
-    interface IMidiInput
+    public interface IMidiInput
     {
         event EventHandler<ChannelMessageEventArgs> ChannelMessageReceived;
       //  int DeviceCount { get; set; }
@@ -63,12 +63,12 @@ namespace MidiWrapper
         void StopListening();
     }
 
-    interface IMidiOutput
+    public interface IMidiOutput
     {
         void Send(IChannelMessage message);
     }
 
-    interface IChannelMessage
+    public interface IChannelMessage
     {
 
         //

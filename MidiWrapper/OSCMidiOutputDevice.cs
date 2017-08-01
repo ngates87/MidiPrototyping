@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace MidiWrapper
 {
-    class OSCMidiOutputDevice : IMidiOutput, IDisposable
+    public class OSCMidiOutputDevice : IMidiOutput, IDisposable
     {
         private Rug.Osc.OscSender sender;
 
@@ -21,16 +21,14 @@ namespace MidiWrapper
 
         public void Send(IChannelMessage message)
         {
+            //new OscMessage("/midi", )
             sender.Send(new OscMessage("/midi",
-                new object[
                 (int)message.Command,
                 (int)message.MessageType,
                 message.MidiChannel,
                 message.Data1,
-                message.Data2]));
+                message.Data2));
         }
-
-
 
         public void Dispose()
         {
